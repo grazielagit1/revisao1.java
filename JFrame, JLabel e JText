@@ -1,0 +1,54 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Janela extends JFrame{
+
+    JTextField input;
+
+    JLabel label;
+
+    public void init(){
+        setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
+
+        input = new JTextField(50); //Este controla o tamanho do campo de texto
+        add(input);
+        input.addActionListener(new AcaoLabel());
+
+        label = new JLabel("Teste");
+        add(label);
+
+        JButton button = new JButton("Enter");
+        add(button); // Adiciona o botão à janela, mesmo sem adicionar, o enter ainda funciona
+        button.addActionListener(new AcaoLabel());
+
+        pack();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
+
+    }
+
+    class AcaoLabel implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String texto = input.getText();
+            input.setText("");
+            label.setText(texto); //Se isso sair,  o que está escrito no text field não passa para o label.
+        }
+    }
+}
+
+
+
+public class Teste {
+    
+    public static void main(String[] args) {
+        new Janela().init();
+    }
+}
+
